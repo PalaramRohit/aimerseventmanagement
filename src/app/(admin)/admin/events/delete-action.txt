@@ -1,0 +1,26 @@
+export async function deleteEvent(eventId: string) {
+  try {
+    const { supabase } = await requireAdmin()
+
+    const { error } = await supabase
+      .from('events')
+      .delete()
+      .eq('id', eventId)
+
+    if (error) {
+      console.error('Database error in deleteEvent:', error)
+      if (error.code === '42501' || error.message?.toLowerCase().includes('policy')) {
+        return { error: 'Unauthorized: You do not have permission to delete events.' }
+      }
+      return { error: 'Failed to delete event due to a database error.' }
+    }
+
+    revalidatePath('/admin/events')
+    
+    return { success: true }
+
+  } catch (err) {
+    console.error('Unexpected error in deleteEvent:', err)
+    return { error: 'An unexpected error occurred while processing your request.' }
+  }
+}
