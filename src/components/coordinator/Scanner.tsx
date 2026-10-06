@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Html5QrcodeScanner } from 'html5-qrcode'
+import { Html5Qrcode } from 'html5-qrcode'
 import { validateScan } from '@/app/(portal)/coordinator/events/[id]/actions'
 import { Scan, CheckCircle2, AlertCircle, XCircle, UserCheck, Coffee, Utensils, UtensilsCrossed, ArrowLeft } from 'lucide-react'
 
@@ -31,22 +31,11 @@ export function Scanner({ eventId, operations }: ScannerProps) {
     if (!isScanning) return;
 
     const scannerId = "reader"
-    const html5QrcodeScanner = new Html5QrcodeScanner(
-      scannerId,
-      { 
-        fps: 10, 
-        qrbox: { width: 250, height: 250 },
-        rememberLastUsedCamera: false,
-        videoConstraints: {
-          facingMode: 'environment'
-        }
-      },
-      false
-    )
+    const html5Qrcode = new Html5Qrcode(scannerId)
 
     const onScanSuccess = async (decodedText: string) => {
       // Pause scanner while validating
-      html5QrcodeScanner.pause();
+      html5Qrcode.pause();
       
       try {
         const result = await validateScan(eventId, operation!, decodedText)
@@ -60,10 +49,22 @@ export function Scanner({ eventId, operations }: ScannerProps) {
       // Ignored: mostly "no qr code found" every frame
     }
 
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure)
+    const config = { fps: 10, qrbox: { width: 250, height: 250 } }
+
+    html5Qrcode.start({ facingMode: "environment" }, config, onScanSuccess, onScanFailure)
+      .catch((err) => {
+        console.warn("Failed to start environment camera, falling back...", err);
+        // Fallback to any camera available
+        html5Qrcode.start({ facingMode: "user" }, config, onScanSuccess, onScanFailure)
+          .catch(e => console.error("Camera failed entirely:", e))
+      })
 
     return () => {
-      html5QrcodeScanner.clear().catch(console.error)
+      if (html5Qrcode.isScanning) {
+        html5Qrcode.stop().then(() => html5Qrcode.clear()).catch(console.error)
+      } else {
+        try { html5Qrcode.clear() } catch(e) {}
+      }
     }
   }, [isScanning, eventId, operation])
 
