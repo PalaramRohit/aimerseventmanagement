@@ -33,7 +33,13 @@ export function Scanner({ eventId, operations }: ScannerProps) {
     const scannerId = "reader"
     const html5QrcodeScanner = new Html5QrcodeScanner(
       scannerId,
-      { fps: 10, qrbox: { width: 250, height: 250 } },
+      { 
+        fps: 10, 
+        qrbox: { width: 250, height: 250 },
+        videoConstraints: {
+          facingMode: 'environment'
+        }
+      },
       false
     )
 
