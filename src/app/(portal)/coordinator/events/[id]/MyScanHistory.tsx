@@ -15,6 +15,7 @@ export function MyScanHistory({ eventId }: { eventId: string }) {
   const [history, setHistory] = useState<ScanHistoryItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [filter, setFilter] = useState('All')
 
   const fetchHistory = useCallback(async () => {
     setLoading(true)
@@ -34,17 +35,32 @@ export function MyScanHistory({ eventId }: { eventId: string }) {
     void fetchHistory()
   }, [fetchHistory])
 
+  const filteredHistory = history.filter(scan => filter === 'All' || scan.operation.toLowerCase() === filter.toLowerCase())
+
   return (
     <div className="bg-white dark:bg-[#080d1a] border border-slate-100 dark:border-cyan-900/20 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.03)] mt-8">
-      <div className="px-6 py-4 border-b border-slate-100 dark:border-cyan-900/20 flex items-center justify-between bg-slate-50 dark:bg-cyan-950/20">
+      <div className="px-6 py-4 border-b border-slate-100 dark:border-cyan-900/20 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-50 dark:bg-cyan-950/20 gap-4">
         <div className="flex items-center gap-2">
           <History size={18} className="text-indigo-600" />
-          <h2 className="font-bold text-slate-800 dark:text-slate-100">My Scan History</h2>
+          <h2 className="font-bold text-slate-800 dark:text-slate-100 whitespace-nowrap">My Scan History</h2>
         </div>
+        
+        <div className="flex flex-wrap gap-2">
+          {['All', 'Attendance', 'Breakfast', 'Lunch', 'Dinner'].map(f => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-3 py-1 text-[10px] font-bold uppercase rounded-full transition-colors ${filter === f ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-[#080d1a] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-cyan-900/20 hover:bg-slate-100 dark:hover:bg-cyan-900/40'}`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
         <button
           onClick={fetchHistory}
           disabled={loading}
-          className="text-slate-500 hover:text-indigo-600 transition-colors disabled:opacity-50 flex items-center gap-1 text-sm font-medium"
+          className="text-slate-500 hover:text-indigo-600 transition-colors disabled:opacity-50 flex items-center gap-1 text-sm font-medium whitespace-nowrap"
         >
           <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
           Refresh
@@ -58,12 +74,12 @@ export function MyScanHistory({ eventId }: { eventId: string }) {
           <div className="p-8 text-center text-slate-500 flex justify-center">
             <RefreshCw size={24} className="animate-spin text-indigo-500" />
           </div>
-        ) : history.length === 0 ? (
-          <div className="p-8 text-center text-slate-500 text-sm italic">You haven&apos;t scanned anyone yet.</div>
+        ) : filteredHistory.length === 0 ? (
+          <div className="p-8 text-center text-slate-500 text-sm italic">No scans found in this category.</div>
         ) : (
           <div className="max-h-[400px] overflow-y-auto">
             <ul className="divide-y divide-slate-50 dark:divide-cyan-900/10">
-              {history.map((scan) => (
+              {filteredHistory.map((scan) => (
                 <li key={scan.scan_id} className="p-4 hover:bg-slate-50 dark:hover:bg-cyan-950/10 flex justify-between items-center transition-colors">
                   <div>
                     <div className="font-bold text-slate-800 dark:text-slate-200">{scan.participant_name}</div>
