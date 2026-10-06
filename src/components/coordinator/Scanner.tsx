@@ -38,7 +38,7 @@ export function Scanner({ eventId, operations }: ScannerProps) {
         qrbox: { width: 250, height: 250 },
         rememberLastUsedCamera: false,
         videoConstraints: {
-          facingMode: { exact: 'environment' }
+          facingMode: 'environment'
         }
       },
       false
