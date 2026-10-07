@@ -121,7 +121,7 @@ export default function ParticipantManager({ eventId, eventData }: { eventId: st
               placeholder="Search name, email, phone, college..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 h-9 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white placeholder-slate-400"
+              className="w-full pl-9 h-9 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
             />
           </div>
           <div className="flex gap-2">
@@ -265,28 +265,28 @@ export default function ParticipantManager({ eventId, eventData }: { eventId: st
                 <div className="space-y-3">
                   <div>
                     <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Full Name *</label>
-                    <input name="full_name" required placeholder="Jane Doe" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input name="full_name" required placeholder="Jane Doe" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Email *</label>
-                    <input name="email" type="email" required placeholder="jane@example.com" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input name="email" type="email" required placeholder="jane@example.com" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Phone</label>
-                    <input name="phone" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input name="phone" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">College</label>
-                    <input name="college" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input name="college" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Branch</label>
-                      <input name="branch" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                      <input name="branch" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
                     <div>
                       <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Year</label>
-                      <input name="academic_year" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                      <input name="academic_year" placeholder="Optional" className="w-full h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
                   </div>
                   

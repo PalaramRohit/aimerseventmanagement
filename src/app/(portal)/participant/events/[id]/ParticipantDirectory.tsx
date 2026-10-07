@@ -91,7 +91,7 @@ export function ParticipantDirectory({ eventId, currentUserId }: { eventId: stri
                   placeholder="https://www.linkedin.com/in/username"
                   value={editUrl}
                   onChange={e => setEditUrl(e.target.value)}
-                  className="flex-1 sm:w-64 px-3 py-1.5 text-sm rounded-lg border border-indigo-200 dark:border-indigo-800 bg-white dark:bg-indigo-950 text-slate-900 dark:text-white"
+                  className="flex-1 sm:w-64 px-3 py-1.5 text-sm rounded-lg border border-indigo-200 dark:border-indigo-800 bg-white dark:bg-indigo-950 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-indigo-300/50"
                 />
                 <button
                   onClick={handleSaveLinkedIn}

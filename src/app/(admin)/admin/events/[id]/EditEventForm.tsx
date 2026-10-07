@@ -81,7 +81,7 @@ export default function EditEventForm({ event }: { event: EventRow }) {
               name="name" 
               defaultValue={event.name} 
               required 
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function EditEventForm({ event }: { event: EventRow }) {
             <textarea 
               name="description" 
               defaultValue={event.description || ''} 
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors min-h-[100px] resize-y" 
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors min-h-[100px] resize-y" 
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function EditEventForm({ event }: { event: EventRow }) {
               type="datetime-local" 
               defaultValue={formatDateForInput(event.start_date)} 
               required 
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -111,7 +111,7 @@ export default function EditEventForm({ event }: { event: EventRow }) {
               type="datetime-local" 
               defaultValue={formatDateForInput(event.end_date)} 
               required 
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -119,7 +119,7 @@ export default function EditEventForm({ event }: { event: EventRow }) {
             <input 
               name="venue" 
               defaultValue={event.venue || ''} 
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors" 
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -130,7 +130,7 @@ export default function EditEventForm({ event }: { event: EventRow }) {
               min="0" 
               defaultValue={event.max_participants || ''} 
               placeholder="Leave blank for unlimited" 
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors placeholder:text-slate-400" 
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500" 
             />
           </div>
         </div>

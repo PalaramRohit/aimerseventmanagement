@@ -139,29 +139,29 @@ export function CoordinatorScanHistory({ eventId }: { eventId: string }) {
                 placeholder="Search participant..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a] text-sm focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <select 
               value={coordinatorFilter}
               onChange={(e) => setCoordinatorFilter(e.target.value)}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a] text-sm font-medium"
+              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white text-sm font-medium"
             >
-              <option value="All">All Coordinators</option>
+              <option value="All" className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">All Coordinators</option>
               {data?.coordinators?.map((c: { coordinator_id: string, coordinator_name: string }) => (
-                <option key={c.coordinator_id} value={c.coordinator_id}>{c.coordinator_name}</option>
+                <option key={c.coordinator_id} value={c.coordinator_id} className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">{c.coordinator_name}</option>
               ))}
             </select>
             <select 
               value={operationFilter}
               onChange={(e) => setOperationFilter(e.target.value)}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a] text-sm font-medium"
+              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white text-sm font-medium"
             >
-              <option value="All">All Operations</option>
-              <option value="attendance">Attendance</option>
-              <option value="breakfast">Breakfast</option>
-              <option value="lunch">Lunch</option>
-              <option value="dinner">Dinner</option>
+              <option value="All" className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">All Operations</option>
+              <option value="attendance" className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">Attendance</option>
+              <option value="breakfast" className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">Breakfast</option>
+              <option value="lunch" className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">Lunch</option>
+              <option value="dinner" className="bg-white dark:bg-[#080d1a] text-slate-900 dark:text-white">Dinner</option>
             </select>
           </div>
         </div>

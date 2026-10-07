@@ -128,7 +128,7 @@ export function TeamManager({ eventId, initialData }: { eventId: string, initial
               placeholder="Search teams, members, college..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-cyan-900/30 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium"
             />
           </div>
           

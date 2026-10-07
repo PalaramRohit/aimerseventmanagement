@@ -3,21 +3,59 @@
 import { useState } from 'react'
 import { login } from './actions'
 import Image from 'next/image'
-import { Mail, Lock, ArrowRight, ShieldCheck, Users, Lightbulb, TrendingUp } from 'lucide-react'
+import { Mail, Lock, ArrowRight, ShieldCheck, Users, Lightbulb, TrendingUp, Loader2 } from 'lucide-react'
 import { ThemeToggle } from '@/components/ThemeToggle'
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'authenticating' | 'redirecting'>('idle')
   const [showPassword, setShowPassword] = useState(false)
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (isLoading) return
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    const email = (formData.get('email') as string)?.trim()
+    const password = formData.get('password') as string
+
+    if (!email || !password) {
+      setError('Please enter both email and password')
+      return
+    }
+
     setIsLoading(true)
+    setStatus('authenticating')
     setError(null)
-    const result = await login(formData)
-    if (result?.error) {
-      setError(result.error)
+
+    try {
+      const result = await login(formData)
+      if (result?.error) {
+        setError(result.error)
+        setIsLoading(false)
+        setStatus('idle')
+      } else {
+        // Successful login, redirection is in progress
+        setStatus('redirecting')
+      }
+    } catch (err: unknown) {
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'digest' in err &&
+        typeof (err as { digest: string }).digest === 'string' &&
+        (err as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+      ) {
+        // Redirection triggered by Server Action
+        setStatus('redirecting')
+        return
+      }
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred')
       setIsLoading(false)
+      setStatus('idle')
     }
   }
 
@@ -128,27 +166,19 @@ export default function LoginPage() {
             <h2 className="text-[#0a1122] text-3xl font-black tracking-tight">AIMERS</h2>
             <span className="text-gray-700 font-bold tracking-widest uppercase mt-1 text-center">Event Management System</span>
           </div>
-
-          {/* Desktop Right Header */}
-          <div className="hidden lg:flex w-full justify-end items-center gap-4 text-xs font-bold tracking-widest text-slate-800 dark:text-slate-100 pt-4 pr-4">
-            <span>LEARN</span>
-            <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
-            <span>BUILD</span>
-            <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
-            <span>BELONG</span>
-            <div className="w-8 h-px bg-slate-400 ml-2"></div>
-          </div>
-
           {/* Form Wrapper */}
           <div className="flex-1 flex items-center justify-center w-full min-h-[500px]">
-            <div className="w-full max-w-md bg-white dark:bg-[#080d1a]/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-8 sm:p-10 border border-white/50">
+            <div className="w-full max-w-md bg-white dark:bg-[#080d1a]/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-8 sm:p-10 border border-white/50 dark:border-cyan-900/30">
               <div className="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mb-8"></div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2 font-serif tracking-tight">Welcome Back</h1>
-              <p className="text-gray-500 text-sm mb-8">Sign in to access your AIMERS account</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 font-serif tracking-tight">Welcome Back</h1>
+              <p className="text-gray-500 dark:text-slate-400 text-sm mb-8">Sign in to access your AIMERS account</p>
             
-            <form action={handleSubmit} className="flex flex-col gap-5">
+            <form 
+              onSubmit={handleSubmit} 
+              className="flex flex-col gap-5"
+            >
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="email" className="text-sm font-bold text-gray-700">Email address</label>
+                <label htmlFor="email" className="text-sm font-bold text-gray-700 dark:text-slate-200">Email address</label>
                 <div className="relative">
                   <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input 
@@ -157,14 +187,15 @@ export default function LoginPage() {
                     type="email" 
                     placeholder="Enter your email"
                     required 
-                    className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-colors placeholder:text-gray-400"
+                    disabled={isLoading}
+                    className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-[#03060a] border border-gray-200 dark:border-cyan-900/30 text-gray-900 dark:text-white rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500 disabled:opacity-75 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>
               
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between items-center">
-                  <label htmlFor="password" className="text-sm font-bold text-gray-700">Password</label>
+                  <label htmlFor="password" className="text-sm font-bold text-gray-700 dark:text-slate-200">Password</label>
                   <button type="button" className="text-xs font-bold text-cyan-600 hover:text-cyan-700 transition-colors">Forgot password?</button>
                 </div>
                 <div className="relative">
@@ -175,12 +206,14 @@ export default function LoginPage() {
                     type={showPassword ? "text" : "password"} 
                     placeholder="Enter your password"
                     required 
-                    className="w-full pl-11 pr-11 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-colors placeholder:text-gray-400"
+                    disabled={isLoading}
+                    className="w-full pl-11 pr-11 py-3 bg-gray-50 dark:bg-[#03060a] border border-gray-200 dark:border-cyan-900/30 text-gray-900 dark:text-white rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-colors placeholder:text-gray-400 dark:placeholder:text-gray-500 disabled:opacity-75 disabled:cursor-not-allowed"
                   />
                   <button 
                     type="button" 
+                    disabled={isLoading}
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       {showPassword ? (
@@ -200,20 +233,54 @@ export default function LoginPage() {
               </div>
 
               {error && (
-                <div className="p-3 bg-red-50 border border-red-100 rounded-xl flex items-start gap-2">
+                <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-xl flex items-start gap-2">
                   <div className="text-red-500 w-4 h-4 shrink-0 flex items-center justify-center rounded-full border-2 border-red-500 font-bold text-[10px]">!</div>
-                  <div className="text-red-700 text-xs font-medium pt-0.5">{error}</div>
+                  <div className="text-red-700 dark:text-red-400 text-xs font-medium pt-0.5">{error}</div>
                 </div>
               )}
 
               <button 
                 type="submit" 
                 disabled={isLoading}
-                className="w-full bg-[#0a1122] text-white px-4 py-3.5 rounded-xl text-sm font-bold shadow-lg shadow-slate-900/20 hover:bg-[#152345] hover:shadow-slate-900/40 disabled:opacity-70 disabled:cursor-not-allowed transition-all mt-4 flex items-center justify-center gap-2 group"
+                aria-busy={isLoading}
+                className={`w-full relative overflow-hidden text-white px-4 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 mt-4 flex items-center justify-center gap-2 group select-none active:scale-[0.99] ${
+                  isLoading
+                    ? status === 'redirecting'
+                      ? 'bg-emerald-600 dark:bg-emerald-600 shadow-[0_0_25px_rgba(16,185,129,0.4)] cursor-wait pointer-events-none'
+                      : 'bg-[#0a1122] dark:bg-cyan-600 shadow-[0_0_25px_rgba(6,182,212,0.4)] cursor-wait pointer-events-none'
+                    : 'bg-[#0a1122] dark:bg-cyan-600 dark:hover:bg-cyan-500 hover:bg-[#152345] shadow-lg shadow-slate-900/20 hover:shadow-slate-900/40 cursor-pointer'
+                }`}
               >
-                {isLoading ? 'Authenticating...' : (
+                {/* Shimmer light sweep animation while loading */}
+                {isLoading && (
+                  <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+                )}
+
+                {isLoading ? (
+                  status === 'redirecting' ? (
+                    <div className="flex items-center justify-center gap-2.5 z-10">
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span className="tracking-wide font-semibold text-white">Redirecting to Dashboard...</span>
+                      <span className="flex items-center gap-1 ml-0.5">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"></span>
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2.5 z-10">
+                      <Loader2 className="w-4 h-4 animate-spin text-cyan-400 dark:text-white" />
+                      <span className="tracking-wide font-semibold">Signing In...</span>
+                      <span className="flex items-center gap-1 ml-0.5">
+                        <span className="w-1.5 h-1.5 bg-cyan-400 dark:bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                        <span className="w-1.5 h-1.5 bg-cyan-400 dark:bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                        <span className="w-1.5 h-1.5 bg-cyan-400 dark:bg-white rounded-full animate-bounce"></span>
+                      </span>
+                    </div>
+                  )
+                ) : (
                   <>
-                    Log In
+                    <span>Log In</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
@@ -221,7 +288,7 @@ export default function LoginPage() {
 
               <div className="relative mt-6 mb-6">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-100"></div>
+                  <div className="w-full border-t border-gray-100 dark:border-cyan-900/20"></div>
                 </div>
                 <div className="relative flex justify-center text-[10px] font-bold tracking-widest">
                   <span className="bg-white dark:bg-[#080d1a] px-3 text-gray-400 uppercase">OR</span>
@@ -237,9 +304,9 @@ export default function LoginPage() {
               </div>
 
               <div className="text-center mt-4">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-slate-400">
                   Don&apos;t have an account?{' '}
-                  <a href="/signup" className="font-bold text-cyan-600 hover:text-cyan-700 transition-colors">
+                  <a href="/signup" className="font-bold text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
                     Sign up
                   </a>
                 </p>

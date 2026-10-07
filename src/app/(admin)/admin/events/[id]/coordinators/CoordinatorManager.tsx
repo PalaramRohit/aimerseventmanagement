@@ -307,7 +307,7 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
                 {modalMode === 'assign' ? (
                   <div>
                     <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Coordinator Email</label>
-                    <input name="email" type="email" required placeholder="user@example.com" className="w-full mt-1 h-10 px-3 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input name="email" type="email" required placeholder="user@example.com" className="w-full mt-1 h-10 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                     <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">The user must already have an account in the system.</p>
                   </div>
                 ) : (
@@ -375,7 +375,7 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
 
                 <div className="pt-2 border-t border-slate-100 dark:border-cyan-900/20">
                   <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Assigned Station (Optional)</label>
-                  <input name="station" defaultValue={selectedCoord?.station || ''} placeholder="e.g. Main Gate, Food Counter 1" className="w-full mt-1 h-10 px-3 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input name="station" defaultValue={selectedCoord?.station || ''} placeholder="e.g. Main Gate, Food Counter 1" className="w-full mt-1 h-10 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
                 <div className="pt-4 flex justify-end">
@@ -409,17 +409,17 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
                 
                 <div>
                   <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Email (Required)</label>
-                  <input name="email" type="email" required placeholder="coordinator@example.com" className="w-full mt-1 h-9 px-3 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input name="email" type="email" required placeholder="coordinator@example.com" className="w-full mt-1 h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
                 
                 <div>
                   <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Full Name</label>
-                  <input name="full_name" type="text" placeholder="John Doe" className="w-full mt-1 h-9 px-3 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input name="full_name" type="text" placeholder="John Doe" className="w-full mt-1 h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
                 
                 <div>
                   <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Phone Number</label>
-                  <input name="phone" type="tel" placeholder="+1234567890" className="w-full mt-1 h-9 px-3 border border-slate-200 dark:border-cyan-900/30 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input name="phone" type="tel" placeholder="+1234567890" className="w-full mt-1 h-9 px-3 border border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#03060a] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
                 
                 <div className="pt-2 flex justify-end">

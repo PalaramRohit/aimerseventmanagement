@@ -81,8 +81,8 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
     <div className="space-y-6">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Problem Statements</h2>
-          <p className="text-slate-500 text-sm mt-1">Manage problem statements and track team selections.</p>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Problem Statements</h2>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage problem statements and track team selections.</p>
         </div>
         <button 
           onClick={() => {
@@ -99,86 +99,86 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
       
       {/* Stats row */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-center gap-3 mb-2 text-slate-500">
+        <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-2xl p-5 shadow-sm">
+          <div className="flex items-center gap-3 mb-2 text-slate-500 dark:text-slate-400">
             <FileText size={18} />
             <span className="text-sm font-medium">Total Statements</span>
           </div>
-          <div className="text-3xl font-bold text-slate-900">{problems.length}</div>
+          <div className="text-3xl font-bold text-slate-900 dark:text-white">{problems.length}</div>
         </div>
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-center gap-3 mb-2 text-indigo-500">
+        <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-2xl p-5 shadow-sm">
+          <div className="flex items-center gap-3 mb-2 text-indigo-500 dark:text-indigo-400">
             <Check size={18} />
             <span className="text-sm font-medium">Teams Selected</span>
           </div>
-          <div className="text-3xl font-bold text-slate-900">{teamsWithSelection}</div>
-          <div className="text-xs text-slate-400 mt-1">of {totalTeams} teams</div>
+          <div className="text-3xl font-bold text-slate-900 dark:text-white">{teamsWithSelection}</div>
+          <div className="text-xs text-slate-400 dark:text-slate-500 mt-1">of {totalTeams} teams</div>
         </div>
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-center gap-3 mb-2 text-amber-500">
+        <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-2xl p-5 shadow-sm">
+          <div className="flex items-center gap-3 mb-2 text-amber-500 dark:text-amber-400">
             <X size={18} />
             <span className="text-sm font-medium">Pending Selection</span>
           </div>
-          <div className="text-3xl font-bold text-slate-900">{teamsWithoutSelection}</div>
+          <div className="text-3xl font-bold text-slate-900 dark:text-white">{teamsWithoutSelection}</div>
         </div>
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <div className="flex items-center gap-3 mb-2 text-emerald-500">
+        <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-2xl p-5 shadow-sm">
+          <div className="flex items-center gap-3 mb-2 text-emerald-500 dark:text-emerald-400">
             <Users size={18} />
             <span className="text-sm font-medium">Most Popular</span>
           </div>
-          <div className="text-lg font-bold text-slate-900 truncate" title={mostSelectedId ? problems.find((p: Problem) => p.id === mostSelectedId)?.title : 'N/A'}>
+          <div className="text-lg font-bold text-slate-900 dark:text-white truncate" title={mostSelectedId ? problems.find((p: Problem) => p.id === mostSelectedId)?.title : 'N/A'}>
             {mostSelectedId ? problems.find((p: Problem) => p.id === mostSelectedId)?.title : 'N/A'}
           </div>
-          <div className="text-xs text-slate-400 mt-1">{maxCount} teams selected</div>
+          <div className="text-xs text-slate-400 dark:text-slate-500 mt-1">{maxCount} teams selected</div>
         </div>
       </div>
       
       {/* Problems list */}
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-2xl shadow-sm overflow-hidden">
         {problems.length === 0 ? (
           <div className="p-12 text-center flex flex-col items-center justify-center">
-            <FileText className="w-12 h-12 text-slate-200 mb-4" />
-            <h3 className="text-lg font-bold text-slate-800 mb-1">No problem statements yet</h3>
-            <p className="text-slate-500 text-sm max-w-sm mb-6">Create the first problem statement to allow teams to make their selection.</p>
+            <FileText className="w-12 h-12 text-slate-200 dark:text-cyan-900/40 mb-4" />
+            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">No problem statements yet</h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm mb-6">Create the first problem statement to allow teams to make their selection.</p>
             <button 
               onClick={() => {
                 setEditingProblem(null)
                 setFormData({ title: '', description: '', is_published: false })
                 setIsModalOpen(true)
               }}
-              className="flex items-center gap-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+              className="flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 px-4 py-2 rounded-xl text-sm font-bold transition-colors"
             >
               <Plus size={16} />
               <span>Create First Statement</span>
             </button>
           </div>
         ) : (
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-cyan-900/20">
             {problems.map((problem: Problem) => (
-              <div key={problem.id} className="p-5 hover:bg-slate-50 transition-colors">
+              <div key={problem.id} className="p-5 hover:bg-slate-50 dark:hover:bg-cyan-950/20 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-bold text-slate-900">{problem.title}</h3>
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white">{problem.title}</h3>
                       {problem.is_published ? (
-                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase tracking-wider rounded border border-emerald-200 flex items-center gap-1">
+                        <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider rounded border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
                           <Eye size={10} /> Published
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider rounded border border-slate-200 flex items-center gap-1">
+                        <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold uppercase tracking-wider rounded border border-slate-200 dark:border-slate-700 flex items-center gap-1">
                           <EyeOff size={10} /> Draft
                         </span>
                       )}
                       {problem.id === mostSelectedId && (
-                        <span className="px-2 py-0.5 bg-indigo-50 text-indigo-700 text-[10px] font-bold uppercase tracking-wider rounded border border-indigo-200">
+                        <span className="px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 text-[10px] font-bold uppercase tracking-wider rounded border border-indigo-200 dark:border-indigo-800">
                           Popular
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-600 text-sm mb-4 line-clamp-2">{problem.description}</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-2">{problem.description}</p>
                     
                     <div className="flex flex-wrap items-center gap-2">
-                      <div className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">
+                      <div className="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2 py-1 rounded-md">
                         {selectionCounts[problem.id] || 0} teams selected
                       </div>
                     </div>
@@ -189,8 +189,8 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
                       onClick={() => handleTogglePublish(problem.id, problem.is_published)}
                       className={`p-2 text-sm rounded-lg border transition-colors ${
                         problem.is_published 
-                          ? 'text-slate-500 bg-slate-50 border-slate-200 hover:bg-slate-100 hover:text-slate-700' 
-                          : 'text-emerald-600 bg-emerald-50 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-700'
+                          ? 'text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-200' 
+                          : 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 hover:text-emerald-700'
                       }`}
                       title={problem.is_published ? "Unpublish" : "Publish"}
                     >
@@ -202,14 +202,14 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
                         setFormData({ title: problem.title, description: problem.description, is_published: problem.is_published })
                         setIsModalOpen(true)
                       }}
-                      className="p-2 text-sm text-blue-600 bg-blue-50 border border-blue-200 hover:bg-blue-100 hover:text-blue-700 rounded-lg transition-colors"
+                      className="p-2 text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 hover:text-blue-700 rounded-lg transition-colors"
                       title="Edit"
                     >
                       <Edit2 size={16} />
                     </button>
                     <button 
                       onClick={() => handleDelete(problem.id)}
-                      className="p-2 text-sm text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 hover:text-red-700 rounded-lg transition-colors"
+                      className="p-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/40 hover:text-red-700 rounded-lg transition-colors"
                       title="Delete"
                     >
                       <Trash2 size={16} />
@@ -225,36 +225,36 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl w-full max-w-lg shadow-xl overflow-hidden">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
-              <h3 className="text-xl font-bold text-slate-900">{editingProblem ? 'Edit Statement' : 'New Statement'}</h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600"><X size={20}/></button>
+          <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-3xl w-full max-w-lg shadow-xl overflow-hidden">
+            <div className="p-6 border-b border-slate-100 dark:border-cyan-900/20 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{editingProblem ? 'Edit Statement' : 'New Statement'}</h3>
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:text-slate-300"><X size={20}/></button>
             </div>
             <form onSubmit={handleSubmit} className="p-6">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Title</label>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Title</label>
                   <input 
                     type="text" 
                     required
                     value={formData.title}
                     onChange={e => setFormData({...formData, title: e.target.value})}
                     placeholder="e.g. Smart Traffic Management"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#03060a] border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Description</label>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Description</label>
                   <textarea 
                     required
                     rows={4}
                     value={formData.description}
                     onChange={e => setFormData({...formData, description: e.target.value})}
                     placeholder="Describe the problem statement..."
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm resize-none"
+                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#03060a] border border-slate-200 dark:border-cyan-900/30 text-slate-900 dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm resize-none placeholder:text-slate-400 dark:placeholder:text-slate-500"
                   />
                 </div>
-                <div className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 rounded-xl">
                   <input 
                     type="checkbox" 
                     id="is_published"
@@ -263,15 +263,15 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
                     className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                   />
                   <div>
-                    <label htmlFor="is_published" className="block text-sm font-semibold text-slate-700">Publish Immediately</label>
-                    <p className="text-xs text-slate-500">Published statements are visible to participants.</p>
+                    <label htmlFor="is_published" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">Publish Immediately</label>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Published statements are visible to participants.</p>
                   </div>
                 </div>
                 
                 {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
                 
                 <div className="pt-4 flex justify-end gap-3">
-                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">Cancel</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">Cancel</button>
                   <button type="submit" disabled={isSubmitting} className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-sm transition-colors disabled:opacity-50">
                     {isSubmitting ? 'Saving...' : 'Save Statement'}
                   </button>
