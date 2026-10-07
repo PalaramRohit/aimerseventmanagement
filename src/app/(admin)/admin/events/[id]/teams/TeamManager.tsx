@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Search, Users, RefreshCw, ChevronDown, ChevronUp, User, UserCheck, Shield, Phone, GraduationCap, GitBranch, Globe, FileText, ExternalLink, CheckCircle2 } from 'lucide-react'
+import { Search, Users, RefreshCw, ChevronDown, ChevronUp, User, UserCheck, Shield, Phone, GraduationCap, GitBranch, Globe, FileText, ExternalLink, CheckCircle2, Download } from 'lucide-react'
 import { TeamData, getEventTeams } from './actions'
 
 export function TeamManager({ eventId, initialData }: { eventId: string, initialData: TeamData[] }) {
@@ -93,6 +93,46 @@ export function TeamManager({ eventId, initialData }: { eventId: string, initial
   const attendanceCompleteTeams = enrichedTeams.filter(t => t.attendanceEligible > 0 && t.attendanceComplete === t.attendanceEligible).length
   const pendingMembersTeams = enrichedTeams.filter(t => !t.fullyRegistered).length
 
+  const downloadCSV = () => {
+    if (filteredTeams.length === 0) return
+    const headers = ['Team Name', 'Team Status', 'Problem Statement', 'Submitted At', 'GitHub URL', 'Deployed URL', 'Member Name', 'Member Email', 'Member Role', 'College', 'Phone', 'Login Status', 'Attendance', 'Breakfast', 'Lunch', 'Dinner']
+    
+    const rows: string[][] = []
+    
+    filteredTeams.forEach(team => {
+      team.members.forEach(member => {
+        rows.push([
+          team.name || '',
+          team.status || '',
+          team.problem_statements?.title || '',
+          team.submitted_at ? 'Yes' : 'No',
+          team.github_url || '',
+          team.deployed_url || '',
+          member.full_name || '',
+          member.email || '',
+          member.team_role || '',
+          member.college || '',
+          member.phone || '',
+          member.participant_id ? 'Registered' : 'Pending',
+          member.attendance_scanned_at ? 'Yes' : 'No',
+          member.breakfast_opted ? (member.breakfast_scanned_at ? 'Consumed' : 'Pending') : 'N/A',
+          member.lunch_opted ? (member.lunch_scanned_at ? 'Consumed' : 'Pending') : 'N/A',
+          member.dinner_opted ? (member.dinner_scanned_at ? 'Consumed' : 'Pending') : 'N/A'
+        ])
+      })
+    })
+
+    const csvContent = [headers.join(','), ...rows.map(r => r.map(f => `"${String(f).replace(/"/g, '""')}"`).join(','))].join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', `teams_${eventId}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <div className="space-y-6">
       
@@ -144,6 +184,13 @@ export function TeamManager({ eventId, initialData }: { eventId: string, initial
               <option value="attendance_complete">Attendance Complete</option>
               <option value="attendance_pending">Attendance Pending</option>
             </select>
+            
+            <button 
+              onClick={downloadCSV}
+              className="bg-white dark:bg-[#080d1a] hover:bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors flex items-center justify-center shrink-0 gap-2"
+            >
+              <Download size={16} /> Export
+            </button>
             
             <button 
               onClick={fetchData}

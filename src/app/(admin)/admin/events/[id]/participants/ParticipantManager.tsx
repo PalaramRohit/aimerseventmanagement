@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { Search, RefreshCw, UserPlus, CheckCircle2, XCircle, Info, MoreHorizontal, Check, X, ShieldAlert, X as CloseIcon } from 'lucide-react'
+import { Search, RefreshCw, UserPlus, CheckCircle2, XCircle, Info, MoreHorizontal, Check, X, ShieldAlert, X as CloseIcon, Download } from 'lucide-react'
 import { getEventParticipants, addParticipantManual, ParticipantData } from './actions'
 import { Button } from '@/components/ui/button'
 
@@ -83,6 +83,34 @@ export default function ParticipantManager({ eventId, eventData }: { eventId: st
     })
   }, [data, searchTerm, statusFilter, attendanceFilter])
 
+  const downloadCSV = () => {
+    if (filteredData.length === 0) return
+    const headers = ['Name', 'Email', 'Phone', 'College', 'Branch', 'Year', 'Status', 'Attendance', 'Breakfast', 'Lunch', 'Dinner']
+    const rows = filteredData.map(p => [
+      p.full_name || '',
+      p.email || '',
+      p.phone || '',
+      p.college || '',
+      p.branch || '',
+      p.academic_year || '',
+      p.status || '',
+      p.attendance_scanned_at ? 'Yes' : 'No',
+      p.breakfast_opted ? (p.breakfast_scanned_at ? 'Consumed' : 'Pending') : 'N/A',
+      p.lunch_opted ? (p.lunch_scanned_at ? 'Consumed' : 'Pending') : 'N/A',
+      p.dinner_opted ? (p.dinner_scanned_at ? 'Consumed' : 'Pending') : 'N/A'
+    ])
+    
+    const csvContent = [headers.join(','), ...rows.map(r => r.map(f => `"${String(f).replace(/"/g, '""')}"`).join(','))].join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', `participants_${eventId}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <div className="bg-white dark:bg-[#080d1a] rounded-2xl border border-slate-100 dark:border-cyan-900/20 shadow-sm overflow-hidden h-full flex flex-col relative">
       <div className="px-6 py-5 border-b border-slate-100 dark:border-cyan-900/20 bg-slate-50 dark:bg-cyan-950/20 flex flex-col gap-4">
@@ -105,6 +133,10 @@ export default function ParticipantManager({ eventId, eventData }: { eventId: st
               <RefreshCw size={18} className={loading ? "animate-spin" : ""} />
             </button>
             
+            <Button onClick={downloadCSV} variant="outline" className="gap-2" size="sm">
+              <Download size={16} />
+              Export CSV
+            </Button>
             <Button onClick={() => setAddModalOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white gap-2" size="sm">
               <UserPlus size={16} />
               Manual Add
