@@ -39,7 +39,7 @@ export function EventHeader({ event }: { event: any }) {
                 {event.registration_open ? (
                   <><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Registration Open</>
                 ) : (
-                  <><span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600"></span> Closed</>
+                  <><span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600"></span> Registration Closed</>
                 )}
               </div>
             </div>

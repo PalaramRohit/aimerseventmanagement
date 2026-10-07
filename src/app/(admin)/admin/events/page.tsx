@@ -90,7 +90,7 @@ export default async function AdminEventsPage() {
                     {event.registration_open ? (
                       <><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Registration Open</>
                     ) : (
-                      <><span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600"></span> Closed</>
+                      <><span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600"></span> Registration Closed</>
                     )}
                   </div>
                   <div className="text-slate-300 dark:text-slate-600 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors">
