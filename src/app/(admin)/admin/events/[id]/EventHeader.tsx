@@ -25,7 +25,7 @@ export function EventHeader({ event }: { event: any }) {
   return (
     <div className="space-y-8 mb-8">
       <div>
-        <Link href="/admin/events" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 dark:text-cyan-400 hover:text-blue-800 dark:hover:text-cyan-300 mb-4 transition-colors">
+        <Link href="/admin/events" prefetch={true} className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 dark:text-cyan-400 hover:text-blue-800 dark:hover:text-cyan-300 mb-4 transition-colors">
           <ArrowLeft size={16} strokeWidth={2.5} />
           Back to Events
         </Link>
@@ -74,6 +74,7 @@ export function EventHeader({ event }: { event: any }) {
           <div className="flex flex-col sm:flex-row w-full md:w-auto shrink-0 gap-3">
             <Link 
               href={`/admin/events/${event.id}/import`}
+              prefetch={true}
               className="bg-white dark:bg-[#0c1427] hover:bg-slate-50 dark:hover:bg-[#131e3b] text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl text-sm font-bold shadow-sm border border-slate-200 dark:border-cyan-900/30 transition-all flex items-center justify-center gap-2"
             >
               <Users size={16} />
@@ -81,6 +82,7 @@ export function EventHeader({ event }: { event: any }) {
             </Link>
             <Link 
               href={`/admin/events/${event.id}/edit`}
+              prefetch={true}
               className="bg-[#0a1122] dark:bg-cyan-600 hover:bg-[#152345] dark:hover:bg-cyan-500 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-lg shadow-slate-900/10 dark:shadow-cyan-900/20 transition-all flex items-center justify-center gap-2 group"
             >
               <Edit3 size={16} className="group-hover:scale-110 transition-transform" />
@@ -98,6 +100,7 @@ export function EventHeader({ event }: { event: any }) {
               <Link
                 key={tab.name}
                 href={tab.path}
+                prefetch={true}
                 className={`
                   whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors
                   ${isActive

@@ -1,13 +1,20 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { cache } from 'react'
 
-export async function requireAdmin() {
+export const requireAuth = cache(async () => {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   
   if (!user) {
     redirect('/login')
   }
+
+  return { user, supabase }
+})
+
+export const requireAdmin = cache(async () => {
+  const { user, supabase } = await requireAuth()
 
   const { data: profile } = await supabase
     .from('profiles')
@@ -20,19 +27,9 @@ export async function requireAdmin() {
   }
 
   return { user, supabase }
-}
-export async function requireAuth() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  
-  if (!user) {
-    redirect('/login')
-  }
+})
 
-  return { user, supabase }
-}
-
-export async function requireParticipant() {
+export const requireParticipant = cache(async () => {
   const { user, supabase } = await requireAuth()
 
   const { data: profile } = await supabase
@@ -45,19 +42,6 @@ export async function requireParticipant() {
   if (role === 'admin') {
     redirect('/admin')
   }
-
-  // A coordinator could technically be a participant, but the instructions say:
-  // "The Coordinator must NOT be rendered as a Participant by default."
-  // So we redirect coordinators to /coordinator from the root participant page?
-  // Actually, if we do that they can NEVER access the participant portal.
-  // The instruction says "If the authenticated user is neither admin nor an assigned coordinator then -> /participant"
-  // Let's redirect coordinators to /coordinator as well if they hit /participant, since they should land there.
-  // Wait, if they are directed to /coordinator, they can't see their own participation!
-  // I will just enforce Admin -> /admin for now, and see if I need to redirect coordinators.
-  // The prompt says "Coordinator attempting: /admin must be denied unless the user is actually an admin. ... Participant attempting: /coordinator must be denied. Admin must be able to access Admin Portal... "
-  // Let's just block Admin from Participant portal.
-  // Wait! "If the authenticated user is neither: admin nor an assigned coordinator then: -> /participant and render the Participant Portal."
-  // This implies if they ARE a coordinator, they should go to /coordinator! Let's enforce that.
 
   const { count: coordinatorCount } = await supabase
     .from('event_coordinators')
@@ -86,9 +70,9 @@ export async function requireParticipant() {
   }
 
   return { user, supabase }
-}
+})
 
-export async function requireCoordinator() {
+export const requireCoordinator = cache(async () => {
   const { user, supabase } = await requireAuth()
 
   // Find user global role
@@ -128,4 +112,5 @@ export async function requireCoordinator() {
   }
 
   return { user, supabase }
-}
+})
+

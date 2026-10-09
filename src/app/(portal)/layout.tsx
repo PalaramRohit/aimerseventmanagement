@@ -57,7 +57,7 @@ export default async function PortalLayout({ children }: { children: ReactNode }
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-slate-50 dark:bg-cyan-950/20 text-slate-900 dark:text-white selection:bg-indigo-500/30 selection:text-indigo-900 flex flex-col font-sans">
-      {/* AIMERS Watermark */}
+      {/* AIMERS Watermark (lazy loaded to prioritize actionable UI and data) */}
       <div className="fixed inset-0 pointer-events-none flex items-center justify-center opacity-[0.03] dark:opacity-[0.08] z-0 mix-blend-multiply dark:mix-blend-screen">
         <div className="relative w-[800px] h-[800px] motion-safe:animate-[spin_20s_linear_infinite]">
           <Image 
@@ -65,7 +65,8 @@ export default async function PortalLayout({ children }: { children: ReactNode }
             alt="" 
             fill 
             className="object-contain rounded-full"
-            priority
+            loading="lazy"
+            sizes="800px"
           />
         </div>
       </div>
@@ -84,18 +85,18 @@ export default async function PortalLayout({ children }: { children: ReactNode }
         {/* Mobile Bottom Navigation */}
         <nav className="md:hidden border-t border-slate-200 dark:border-cyan-900/30 bg-white dark:bg-[#080d1a]/95 backdrop-blur-xl sticky bottom-0 z-50 pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
           <div className="flex justify-around p-2">
-            <Link href="/participant" className="flex flex-col items-center gap-1.5 p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors flex-1">
+            <Link href="/participant" prefetch={true} className="flex flex-col items-center gap-1.5 p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors flex-1">
               <User size={20} strokeWidth={2.5} />
               <span className="text-[10px] font-bold tracking-wide">Participant</span>
             </Link>
             {isCoordinator && (
-              <Link href="/coordinator" className="flex flex-col items-center gap-1.5 p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors flex-1">
+              <Link href="/coordinator" prefetch={true} className="flex flex-col items-center gap-1.5 p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors flex-1">
                 <BadgeCheck size={20} strokeWidth={2.5} />
                 <span className="text-[10px] font-bold tracking-wide">Coordinator</span>
               </Link>
             )}
             {isAdmin && (
-              <Link href="/admin" className="flex flex-col items-center gap-1.5 p-2 rounded-xl text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors flex-1">
+              <Link href="/admin" prefetch={true} className="flex flex-col items-center gap-1.5 p-2 rounded-xl text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors flex-1">
                 <ShieldAlert size={20} strokeWidth={2.5} />
                 <span className="text-[10px] font-bold tracking-wide">Admin</span>
               </Link>

@@ -63,7 +63,7 @@ export function Scanner({ eventId, operations }: ScannerProps) {
       if (html5Qrcode.isScanning) {
         html5Qrcode.stop().then(() => html5Qrcode.clear()).catch(console.error)
       } else {
-        try { html5Qrcode.clear() } catch(e) {}
+        try { html5Qrcode.clear() } catch {}
       }
     }
   }, [isScanning, eventId, operation])

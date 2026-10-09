@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-interface CometSpinnerProps extends React.HTMLAttributes<HTMLDivElement> {}
+type CometSpinnerProps = React.HTMLAttributes<HTMLDivElement>
 
 export function CometSpinner({ className, ...props }: CometSpinnerProps) {
   return (

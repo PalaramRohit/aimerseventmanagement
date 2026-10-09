@@ -1,7 +1,7 @@
 import { requireCoordinator } from '@/lib/auth/server'
 import { getCoordinatorDashboardData } from '@/lib/actions/claim'
 import Link from 'next/link'
-import { MapPin, Calendar, CheckCircle } from 'lucide-react'
+import { MapPin, Calendar } from 'lucide-react'
 import ClaimCoordinatorEventButton from './ClaimCoordinatorEventButton'
 
 export default async function CoordinatorDashboard() {
@@ -43,7 +43,7 @@ export default async function CoordinatorDashboard() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {assigned.map(event => (
-              <Link key={event.id} href={`/coordinator/events/${event.id}`} className="group h-full block">
+              <Link key={event.id} href={`/coordinator/events/${event.id}`} prefetch={true} className="group h-full block">
                 <div className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-indigo-900/5 transition-all hover:border-indigo-300 h-full flex flex-col cursor-pointer relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-indigo-50 to-transparent -mr-4 -mt-4 rounded-bl-full z-0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   

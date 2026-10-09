@@ -98,9 +98,9 @@ export function CoordinatorScanHistory({ eventId }: { eventId: string }) {
                 <th className="px-6 py-4 border-b border-slate-100 dark:border-cyan-900/20 text-center">B / L / D</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50">
+            <tbody className="divide-y divide-slate-100 dark:divide-cyan-900/20">
               {data?.coordinators?.map((c: { coordinator_id: string, coordinator_name: string, task_attendance: boolean, task_breakfast: boolean, task_lunch: boolean, task_dinner: boolean, total_scans: number, last_scan: string, attendance_count: number, breakfast_count: number, lunch_count: number, dinner_count: number }) => (
-                <tr key={c.coordinator_id} className="hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors">
+                <tr key={c.coordinator_id} className="hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors">
                   <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">{c.coordinator_name}</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
@@ -176,9 +176,9 @@ export function CoordinatorScanHistory({ eventId }: { eventId: string }) {
                 <th className="px-6 py-4 border-b border-slate-100 dark:border-cyan-900/20">Time</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50">
+            <tbody className="divide-y divide-slate-100 dark:divide-cyan-900/20">
               {filteredHistory.length > 0 ? filteredHistory.map((scan: { scan_id: string, participant_name: string, participant_email: string, operation: string, coordinator_name: string, scanned_at: string }) => (
-                <tr key={scan.scan_id} className="hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors">
+                <tr key={scan.scan_id} className="hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors">
                   <td className="px-6 py-4">
                     <div className="font-bold text-slate-900 dark:text-white text-sm">{scan.participant_name}</div>
                     <div className="text-xs text-slate-500">{scan.participant_email}</div>

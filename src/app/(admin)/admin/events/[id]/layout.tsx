@@ -1,6 +1,7 @@
 import { requireAdmin } from '@/lib/auth/server'
 import { notFound } from 'next/navigation'
 import { EventHeader } from './EventHeader'
+import { getCachedEvent } from '@/lib/events/server'
 
 export default async function EventDashboardLayout({ 
   children,
@@ -10,14 +11,10 @@ export default async function EventDashboardLayout({
   params: Promise<{ id: string }> 
 }) {
   const { id } = await params
-  const { supabase } = await requireAdmin()
+  await requireAdmin()
 
-  // Fetch Event
-  const { data: event, error } = await supabase
-    .from('events')
-    .select('*')
-    .eq('id', id)
-    .single()
+  // Fetch Event (cached per-request)
+  const { event, error } = await getCachedEvent(id)
 
   if (error || !event) {
     console.error("Layout notFound triggered for id:", id, "Error:", error, "Event:", event)

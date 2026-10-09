@@ -193,7 +193,7 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
             </thead>
             <tbody className="divide-y divide-slate-100 text-sm">
               {data.map(c => (
-                <tr key={c.coordinator_id} className="hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors group">
+                <tr key={c.coordinator_id} className="hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="font-bold text-slate-900 dark:text-white">{c.full_name || 'Unknown Name'}</div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">{c.email}</div>
@@ -322,7 +322,7 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
                   <div className="space-y-3">
                     <label className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase block">Scanner Access (Core)</label>
                     
-                    <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer transition-colors shadow-sm">
+                    <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer transition-colors shadow-sm">
                       <input type="checkbox" name="task_attendance" value="true" defaultChecked={selectedCoord?.task_attendance ?? false} className="rounded border-slate-300 w-4 h-4 text-blue-600" />
                       <div>
                         <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">Attendance</div>
@@ -331,19 +331,19 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
                     </label>
                     
                     {!!eventData?.breakfast_enabled && (
-                      <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer transition-colors shadow-sm">
+                      <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer transition-colors shadow-sm">
                         <input type="checkbox" name="task_breakfast" value="true" defaultChecked={selectedCoord?.task_breakfast ?? false} className="rounded border-slate-300 w-4 h-4 text-amber-600" />
                         <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">Breakfast</div>
                       </label>
                     )}
                     {!!eventData?.lunch_enabled && (
-                      <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer transition-colors shadow-sm">
+                      <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer transition-colors shadow-sm">
                         <input type="checkbox" name="task_lunch" value="true" defaultChecked={selectedCoord?.task_lunch ?? false} className="rounded border-slate-300 w-4 h-4 text-orange-600" />
                         <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">Lunch</div>
                       </label>
                     )}
                     {!!eventData?.dinner_enabled && (
-                      <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer transition-colors shadow-sm">
+                      <label className="flex items-center gap-3 p-3 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer transition-colors shadow-sm">
                         <input type="checkbox" name="task_dinner" value="true" defaultChecked={selectedCoord?.task_dinner ?? false} className="rounded border-slate-300 w-4 h-4 text-indigo-600" />
                         <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">Dinner</div>
                       </label>
@@ -358,7 +358,7 @@ export default function CoordinatorManager({ eventId, eventData }: { eventId: st
                     
                     <div className="max-h-[220px] overflow-y-auto pr-2 space-y-2 pb-2">
                       {ALLOWED_CUSTOM_TASKS.map(task => (
-                        <label key={task} className="flex items-center gap-3 p-2.5 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer transition-colors shadow-sm">
+                        <label key={task} className="flex items-center gap-3 p-2.5 border border-slate-100 dark:border-cyan-900/20 rounded-lg hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer transition-colors shadow-sm">
                           <input 
                             type="checkbox" 
                             name={`task_custom_${task}`} 

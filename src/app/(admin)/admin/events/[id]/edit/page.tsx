@@ -2,16 +2,13 @@ import { requireAdmin } from '@/lib/auth/server'
 import { notFound } from 'next/navigation'
 import EditEventForm from '../EditEventForm'
 import Link from 'next/link'
+import { getCachedEvent } from '@/lib/events/server'
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const { supabase } = await requireAdmin()
+  await requireAdmin()
 
-  const { data: event, error } = await supabase
-    .from('events')
-    .select('*')
-    .eq('id', id)
-    .single()
+  const { event, error } = await getCachedEvent(id)
 
   if (error || !event) {
     notFound()

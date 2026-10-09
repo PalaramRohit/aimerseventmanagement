@@ -58,7 +58,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
           {navItems.map((item) => {
             const Icon = item.icon
             return (
-              <Link key={item.name} href={item.href}>
+              <Link key={item.name} href={item.href} prefetch={true}>
                 <span className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors group">
                   <Icon size={18} className="text-slate-500 group-hover:text-cyan-400 transition-colors" />
                   {item.name}
@@ -118,7 +118,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
         {/* PAGE CONTENT */}
         <main className="flex-1 overflow-auto p-4 sm:p-8 relative">
-          {/* Centered Logo Watermark for Dark Mode */}
+          {/* Centered Logo Watermark for Dark Mode (lazy loaded to prevent blocking actionable UI) */}
           <div className="hidden dark:flex fixed inset-0 pointer-events-none items-center justify-center opacity-[0.08] z-0 mix-blend-screen">
             <div className="relative w-[800px] h-[800px] motion-safe:animate-[spin_20s_linear_infinite]">
               <Image 
@@ -126,7 +126,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
                 alt="" 
                 fill 
                 className="object-contain rounded-full"
-                priority
+                loading="lazy"
+                sizes="800px"
               />
             </div>
           </div>

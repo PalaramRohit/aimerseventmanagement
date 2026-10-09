@@ -83,7 +83,7 @@ export function ProblemSelector({ eventId, teamId, problemStatements, initialSel
                 isSelected 
                   ? 'bg-violet-50 dark:bg-violet-900/20 border-violet-200 dark:border-violet-700 ring-2 ring-violet-500 ring-opacity-50' 
                   : isLocked
-                    ? 'bg-slate-50 dark:bg-slate-900/50 border-slate-100 dark:border-slate-800 opacity-50 grayscale hover:bg-slate-100'
+                    ? 'bg-slate-50 dark:bg-slate-900/50 border-slate-100 dark:border-slate-800 opacity-50 grayscale hover:bg-slate-100 dark:hover:bg-slate-800/50'
                     : 'bg-white dark:bg-[#080d1a] border-slate-200 dark:border-cyan-900/30 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-md'
               }`}
             >

@@ -110,7 +110,7 @@ export default function ImportPage({ params }: { params: Promise<{ id: string }>
 
         <div className="mt-8">
           <label className="block w-full">
-            <div className={`border-2 border-dashed rounded-2xl p-8 text-center transition-colors ${file ? 'border-blue-500 bg-blue-50' : 'border-slate-300 hover:border-slate-400 hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer'}`}>
+            <div className={`border-2 border-dashed rounded-2xl p-8 text-center transition-colors ${file ? 'border-blue-500 bg-blue-50' : 'border-slate-300 hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer'}`}>
               <FileUp size={32} className={`mx-auto mb-3 ${file ? 'text-blue-500' : 'text-slate-400'}`} />
               {file ? (
                 <div>
@@ -251,7 +251,7 @@ export default function ImportPage({ params }: { params: Promise<{ id: string }>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {preview.valid.slice(0, 100).map((v, i) => (
-                      <tr key={i} className="hover:bg-slate-50 dark:bg-cyan-950/20">
+                      <tr key={i} className="hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors">
                         {preview.isTeamImport && (
                           <td className="px-6 py-3 font-medium text-indigo-700">{v.team_name}</td>
                         )}
@@ -283,7 +283,7 @@ export default function ImportPage({ params }: { params: Promise<{ id: string }>
             <button 
               onClick={() => { setPreview(null); setFile(null) }}
               disabled={loading}
-              className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 text-slate-600 dark:text-slate-300 font-bold py-3 px-6 rounded-xl hover:bg-slate-50 dark:bg-cyan-950/20 disabled:opacity-50 transition-colors"
+              className="bg-white dark:bg-[#080d1a] border border-slate-200 dark:border-cyan-900/30 text-slate-600 dark:text-slate-300 font-bold py-3 px-6 rounded-xl hover:bg-slate-50 dark:hover:bg-cyan-950/40 disabled:opacity-50 transition-colors"
             >
               Cancel
             </button>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { getEventOperationsData, OperationsData } from './actions'
 import { RefreshCw, Users, CheckCircle2, Coffee, Utensils, ShieldCheck, Activity, AlertCircle, Clock, X } from 'lucide-react'
 import { CoordinatorScanHistory } from './CoordinatorScanHistory'
@@ -12,7 +12,7 @@ export default function OperationsDashboard({ eventId, eventData }: { eventId: s
   const [error, setError] = useState<string | null>(null)
   const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null)
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setIsLoading(true)
     setError(null)
     const result = await getEventOperationsData(eventId)
@@ -23,12 +23,12 @@ export default function OperationsDashboard({ eventId, eventData }: { eventId: s
       setLastRefreshed(new Date())
     }
     setIsLoading(false)
-  }
+  }, [eventId])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData()
-  }, [eventId])
+  }, [fetchData])
 
   const [selectedList, setSelectedList] = useState<'registered' | 'pending' | 'active' | null>(null)
 
@@ -238,9 +238,9 @@ export default function OperationsDashboard({ eventId, eventData }: { eventId: s
                   <th className="px-6 py-4 border-b border-slate-100 dark:border-cyan-900/20 text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-slate-100 dark:divide-cyan-900/20">
                 {data.coordinatorStats.map(stat => (
-                  <tr key={stat.coordinatorId} className="hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors">
+                  <tr key={stat.coordinatorId} className="hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors">
                     <td className="px-6 py-4">
                       <div className="font-bold text-slate-900 dark:text-white">{stat.name}</div>
                       {stat.lastScanTime && (
@@ -325,7 +325,7 @@ export default function OperationsDashboard({ eventId, eventData }: { eventId: s
               </h3>
               <button
                 onClick={() => setSelectedList(null)}
-                className="text-slate-400 hover:text-slate-700 dark:text-slate-200 transition-colors p-1 rounded-lg hover:bg-slate-100 dark:bg-cyan-900/20"
+                className="text-slate-400 hover:text-slate-700 dark:text-slate-200 transition-colors p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-cyan-900/40"
               >
                 <X size={20} />
               </button>

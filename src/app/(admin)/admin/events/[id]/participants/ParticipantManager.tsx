@@ -216,7 +216,7 @@ export default function ParticipantManager({ eventId, eventData }: { eventId: st
             </thead>
             <tbody className="divide-y divide-slate-100 text-sm">
               {filteredData.map((p, idx) => (
-                <tr key={idx} className="hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors">
+                <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors">
                   <td className="px-4 py-3">
                     <div className="font-bold text-slate-900 dark:text-white">{p.full_name || 'Unknown Name'}</div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">{p.email}</div>

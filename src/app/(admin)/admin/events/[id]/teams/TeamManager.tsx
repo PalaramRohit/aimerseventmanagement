@@ -187,7 +187,7 @@ export function TeamManager({ eventId, initialData }: { eventId: string, initial
             
             <button 
               onClick={downloadCSV}
-              className="bg-white dark:bg-[#080d1a] hover:bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors flex items-center justify-center shrink-0 gap-2"
+              className="bg-white dark:bg-[#080d1a] hover:bg-slate-50 dark:hover:bg-cyan-950/40 border border-slate-200 dark:border-cyan-900/30 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors flex items-center justify-center shrink-0 gap-2"
             >
               <Download size={16} /> Export
             </button>
@@ -195,7 +195,7 @@ export function TeamManager({ eventId, initialData }: { eventId: string, initial
             <button 
               onClick={fetchData}
               disabled={loading}
-              className="bg-white dark:bg-[#080d1a] hover:bg-slate-50 dark:bg-cyan-950/20 border border-slate-200 dark:border-cyan-900/30 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors flex items-center justify-center shrink-0"
+              className="bg-white dark:bg-[#080d1a] hover:bg-slate-50 dark:hover:bg-cyan-950/40 border border-slate-200 dark:border-cyan-900/30 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl text-sm font-bold shadow-sm transition-colors flex items-center justify-center shrink-0"
             >
               <RefreshCw size={16} className={loading ? 'animate-spin opacity-50' : ''} />
             </button>
@@ -212,7 +212,7 @@ export function TeamManager({ eventId, initialData }: { eventId: string, initial
             filteredTeams.map(team => (
               <div key={team.id} className="flex flex-col">
                 <div 
-                  className={`p-4 sm:px-6 hover:bg-slate-50 dark:bg-cyan-950/20 cursor-pointer flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between transition-colors ${expandedTeamId === team.id ? 'bg-blue-50/30' : ''}`}
+                  className={`p-4 sm:px-6 hover:bg-slate-50 dark:hover:bg-cyan-950/40 cursor-pointer flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between transition-colors ${expandedTeamId === team.id ? 'bg-blue-50/30 dark:bg-cyan-950/40' : ''}`}
                   onClick={() => setExpandedTeamId(expandedTeamId === team.id ? null : team.id)}
                 >
                   <div className="flex-1 min-w-0">

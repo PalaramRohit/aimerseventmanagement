@@ -44,14 +44,16 @@ export default function PortalHeader({ userEmail, isCoordinator, isAdmin }: { us
           <nav className={`hidden md:flex gap-1 ml-4 pl-4 border-l ${pathname.startsWith('/admin') ? 'border-slate-700' : 'border-slate-200 dark:border-cyan-900/30'}`}>
             <Link 
               href="/participant" 
-              className={`px-3 py-1.5 rounded-md text-sm font-bold transition-colors ${pathname.startsWith('/participant') ? 'bg-slate-100 dark:bg-cyan-900/20 text-slate-900 dark:text-white' : pathname.startsWith('/admin') ? 'text-slate-400 hover:text-white hover:bg-slate-800' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:bg-cyan-950/20'}`}
+              prefetch={true}
+              className={`px-3 py-1.5 rounded-md text-sm font-bold transition-colors ${pathname.startsWith('/participant') ? 'bg-slate-100 dark:bg-cyan-900/20 text-slate-900 dark:text-white' : pathname.startsWith('/admin') ? 'text-slate-400 hover:text-white hover:bg-slate-800' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-cyan-950/40'}`}
             >
               Participant
             </Link>
             {isCoordinator && (
               <Link 
                 href="/coordinator" 
-                className={`px-3 py-1.5 rounded-md text-sm font-bold transition-colors ${pathname.startsWith('/coordinator') ? 'bg-slate-100 dark:bg-cyan-900/20 text-slate-900 dark:text-white' : pathname.startsWith('/admin') ? 'text-slate-400 hover:text-white hover:bg-slate-800' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:bg-cyan-950/20'}`}
+                prefetch={true}
+                className={`px-3 py-1.5 rounded-md text-sm font-bold transition-colors ${pathname.startsWith('/coordinator') ? 'bg-slate-100 dark:bg-cyan-900/20 text-slate-900 dark:text-white' : pathname.startsWith('/admin') ? 'text-slate-400 hover:text-white hover:bg-slate-800' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-cyan-950/40'}`}
               >
                 Coordinator
               </Link>
@@ -59,6 +61,7 @@ export default function PortalHeader({ userEmail, isCoordinator, isAdmin }: { us
             {isAdmin && (
               <Link 
                 href="/admin" 
+                prefetch={true}
                 className={`px-3 py-1.5 rounded-md text-sm font-bold transition-colors ${pathname.startsWith('/admin') ? 'bg-indigo-500/20 text-indigo-300' : 'text-indigo-600 hover:bg-indigo-50'}`}
               >
                 Admin

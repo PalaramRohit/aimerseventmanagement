@@ -118,7 +118,7 @@ export default function NewEventPage() {
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Configure registration, attendance and meal options</p>
           </div>
           <div className="p-0 flex flex-col divide-y divide-slate-100">
-            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors cursor-pointer group">
+            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors cursor-pointer group">
               <div className="flex flex-col pr-4">
                 <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Registration Open</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Allow participants to register</span>
@@ -129,7 +129,7 @@ export default function NewEventPage() {
               </div>
             </label>
             
-            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors cursor-pointer group">
+            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors cursor-pointer group">
               <div className="flex flex-col pr-4">
                 <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Attendance Scanning</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Enable attendance scanning</span>
@@ -140,7 +140,7 @@ export default function NewEventPage() {
               </div>
             </label>
 
-            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors cursor-pointer group">
+            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors cursor-pointer group">
               <div className="flex flex-col pr-4">
                 <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Breakfast Enabled</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Enable breakfast recording</span>
@@ -151,7 +151,7 @@ export default function NewEventPage() {
               </div>
             </label>
 
-            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors cursor-pointer group">
+            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors cursor-pointer group">
               <div className="flex flex-col pr-4">
                 <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Lunch Enabled</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Enable lunch recording</span>
@@ -162,7 +162,7 @@ export default function NewEventPage() {
               </div>
             </label>
 
-            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:bg-cyan-950/20 transition-colors cursor-pointer group">
+            <label className="flex items-center justify-between p-5 hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors cursor-pointer group">
               <div className="flex flex-col pr-4">
                 <span className="text-sm font-bold text-slate-800 dark:text-slate-100">Dinner Enabled</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Enable dinner recording</span>

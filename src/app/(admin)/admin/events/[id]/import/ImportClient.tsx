@@ -124,7 +124,7 @@ export default function ImportClient({ eventId, eventName }: { eventId: string, 
             <button 
               type="submit" 
               disabled={!file || isLoading}
-              className="bg-white dark:bg-[#080d1a] border-2 border-slate-200 dark:border-cyan-900/30 hover:border-slate-300 hover:bg-slate-50 dark:bg-cyan-950/20 text-slate-700 dark:text-slate-200 px-8 py-3 rounded-xl text-sm font-bold shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all whitespace-nowrap flex items-center justify-center gap-2"
+              className="bg-white dark:bg-[#080d1a] border-2 border-slate-200 dark:border-cyan-900/30 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-cyan-950/40 text-slate-700 dark:text-slate-200 px-8 py-3 rounded-xl text-sm font-bold shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all whitespace-nowrap flex items-center justify-center gap-2"
             >
               {isLoading && !preview ? (
                 <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-slate-300 border-t-slate-600 rounded-full animate-spin"></span> Parsing...</span>

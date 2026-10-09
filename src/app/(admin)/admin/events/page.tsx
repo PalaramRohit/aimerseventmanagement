@@ -30,7 +30,7 @@ export default async function AdminEventsPage() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <Link href="/admin" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 dark:text-cyan-400 hover:text-blue-800 dark:hover:text-cyan-300 mb-2 transition-colors">
+          <Link href="/admin" prefetch={true} className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 dark:text-cyan-400 hover:text-blue-800 dark:hover:text-cyan-300 mb-2 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Back to Dashboard
           </Link>
@@ -39,6 +39,7 @@ export default async function AdminEventsPage() {
         </div>
         <Link 
           href="/admin/events/new" 
+          prefetch={true}
           className="w-full sm:w-auto bg-[#0a1122] dark:bg-cyan-600 hover:bg-[#152345] dark:hover:bg-cyan-500 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-slate-900/10 dark:shadow-cyan-900/20 transition-all flex items-center justify-center gap-2 group"
         >
           <Plus size={18} className="group-hover:rotate-90 transition-transform" />
@@ -79,7 +80,7 @@ export default async function AdminEventsPage() {
       ) : (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {events.map((event) => (
-            <Link key={event.id} href={`/admin/events/${event.id}`} className="group block h-full">
+            <Link key={event.id} href={`/admin/events/${event.id}`} prefetch={true} className="group block h-full">
               <div className="bg-white dark:bg-[#080d1a] border border-slate-100 dark:border-cyan-900/30 rounded-2xl p-6 h-full flex flex-col hover:border-blue-200 dark:hover:border-cyan-500 hover:shadow-lg hover:shadow-blue-900/5 dark:hover:shadow-cyan-900/20 transition-all duration-300 relative overflow-hidden">
                 
                 {/* Subtle top accent line */}

@@ -12,7 +12,6 @@ export function ProblemManager({ eventId, initialData }: { eventId: string, init
   const [teams] = useState(initialData.teams || [])
   
   const [isModalOpen, setIsModalOpen] = useState(false)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [editingProblem, setEditingProblem] = useState<Problem | null>(null)
   
   const [formData, setFormData] = useState({ title: '', description: '', is_published: false })
