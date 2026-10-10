@@ -105,7 +105,7 @@ export async function previewImport(eventId: string, formData: FormData): Promis
           members.push({
             index: i,
             email: emailRaw,
-            role: normalizedRow[`member ${i} role`]?.trim(),
+            role: normalizedRow[`member ${i} role`]?.trim() || (i === 1 ? 'leader' : 'member'),
             name: normalizedRow[`member ${i} full name`] || normalizedRow[`member ${i} name`]
           })
         }
@@ -242,7 +242,7 @@ export async function commitImport(eventId: string, formData: FormData): Promise
           if (seenEmails.has(email)) continue
           seenEmails.add(email)
 
-          const role = normalizedRow[`member ${i} role`]?.trim()?.toLowerCase()
+          const role = normalizedRow[`member ${i} role`]?.trim()?.toLowerCase() || (i === 1 ? 'leader' : 'member')
           if (role !== 'leader' && role !== 'member') continue
 
           const customFields: Record<string, string> = {}
