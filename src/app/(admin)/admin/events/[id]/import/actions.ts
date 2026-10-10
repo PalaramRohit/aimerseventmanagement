@@ -205,6 +205,25 @@ export async function commitImport(eventId: string, formData: FormData): Promise
   try {
     const { supabase } = await requireAdmin()
     
+    const { data: event } = await supabase
+      .from('events')
+      .select('breakfast_enabled, lunch_enabled, dinner_enabled')
+      .eq('id', eventId)
+      .single()
+
+    const eventDefaults = {
+      breakfast: event?.breakfast_enabled ?? false,
+      lunch: event?.lunch_enabled ?? false,
+      dinner: event?.dinner_enabled ?? false
+    }
+
+    const resolveFood = (val: string | undefined, eventDefault: boolean) => {
+      if (!val || val.trim() === '') return eventDefault
+      const lower = val.toLowerCase().trim()
+      if (['no', 'n', 'false', '0'].includes(lower)) return false
+      return isTrue(val)
+    }
+
     const file = formData.get('file') as File
     if (!file || file.size === 0) return { error: "File is required" }
 
@@ -264,9 +283,9 @@ export async function commitImport(eventId: string, formData: FormData): Promise
             college: normalizedRow[`member ${i} college`] || null,
             branch: normalizedRow[`member ${i} branch`] || null,
             academic_year: normalizedRow[`member ${i} academic year`] || null,
-            breakfast_opted: isTrue(normalizedRow[`member ${i} breakfast`]),
-            lunch_opted: isTrue(normalizedRow[`member ${i} lunch`]),
-            dinner_opted: isTrue(normalizedRow[`member ${i} dinner`]),
+            breakfast_opted: resolveFood(normalizedRow[`member ${i} breakfast`], eventDefaults.breakfast),
+            lunch_opted: resolveFood(normalizedRow[`member ${i} lunch`], eventDefaults.lunch),
+            dinner_opted: resolveFood(normalizedRow[`member ${i} dinner`], eventDefaults.dinner),
             registration_data: Object.keys(customFields).length > 0 ? customFields : null
           })
         }
@@ -331,9 +350,9 @@ export async function commitImport(eventId: string, formData: FormData): Promise
               college: college || null,
               branch: branch || null,
               academic_year: academic_year || null,
-              breakfast_opted: isTrue(breakfast),
-              lunch_opted: isTrue(lunch),
-              dinner_opted: isTrue(dinner),
+              breakfast_opted: resolveFood(breakfast, eventDefaults.breakfast),
+              lunch_opted: resolveFood(lunch, eventDefaults.lunch),
+              dinner_opted: resolveFood(dinner, eventDefaults.dinner),
               registration_data: Object.keys(rest).length > 0 ? rest : null
             })
           }
